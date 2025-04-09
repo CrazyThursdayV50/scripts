@@ -1,0 +1,36 @@
+services:
+  mysql:
+    container_name: mysql
+    restart: on-failure
+    image: bitnami/mysql:8.4.0
+    privileged: true
+    env_file: ${MYSQL_ENV_FILE}
+    ports:
+      - 3306:3306
+    networks:
+      general:
+        aliases:
+          - mysql
+    volumes:
+      - ${MYSQL_DATA}:/bitnami/mysql/data
+      - ${MYSQL_INIT_DIR}:/docker-entrypoint-initdb.d
+
+    healthcheck:
+      test: ["CMD", "/opt/bitnami/scripts/mysql/healthcheck.sh"]
+      interval: 15s
+      timeout: 5s
+      retries: 6
+
+    mem_limit: 1.5G
+    memswap_limit: 3G
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true

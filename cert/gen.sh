@@ -1,7 +1,7 @@
 #!/bin/bash
 # 脚本用于生成 OpenSSL 证书，用于服务端和客户端的自签名证书验证
 
-OUTPUT_DIR="./certs"
+OUTPUT_DIR=./certs
 
 # 证书有效期（天）
 VALID_DAYS=3650

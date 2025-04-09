@@ -1,0 +1,25 @@
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true
+
+services:
+  redis:
+    container_name: redis
+    restart: on-failure
+    image: docker.io/bitnami/redis:7.4
+    privileged: true
+    env_file: ${REDIS_ENV_FILE}
+    ports:
+      - 6379:6379
+    volumes:
+      - ${REDIS_DATA}:/bitnami/redis/data
+    networks:
+      general:
+        aliases:
+          - redis
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10

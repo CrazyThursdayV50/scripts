@@ -1,0 +1,39 @@
+services:
+  elastic:
+    container_name: elastic
+    image: bitnami/elasticsearch:latest
+    privileged: true
+    ports:
+      - 9200:9200
+    mem_limit: 2G
+    memswap_limit: 4G
+    networks:
+      general:
+        aliases:
+          - elastic
+
+    healthcheck:
+      test:
+        [
+          "CMD-SHELL",
+          "curl --silent --fail -u elastic:${ES_PASSWORD} localhost:9200/_cluster/health || exit 1",
+        ]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+    env_file: ${ELASTIC_ENV_FILE}
+    volumes:
+      - ${ES_DATA}:/bitnami/elasticsearch/data
+      - ${ES_PLUGINS}:/bitnami/elasticsearch/plugins
+      - ${ES_LOGS}:/opt/bitnami/elasticsearch/logs
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true

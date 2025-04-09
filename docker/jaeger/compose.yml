@@ -1,0 +1,38 @@
+services:
+  jaeger:
+    container_name: jaeger
+    restart: on-failure
+    image: bitnami/jaeger:latest
+    privileged: true
+    env_file: ${JAEGER_ENV_FILE}
+    ports:
+      - 5775:5775/udp
+      - 6831:6831/udp
+      - 6832:6832/udp
+      - 5778:5778
+      - 16686:16686
+      - 14268:14268
+      - 14250:14250
+      - 9411:9411
+    networks:
+      general:
+        aliases:
+          - jaeger
+    volumes:
+      - ${JAEGER_LOGS}:/bitnami/jaeger/logs
+    mem_limit: 512M
+    memswap_limit: 1G
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
+
+    # depends_on:
+    #   elastic:
+    #     condition: service_healthy
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true

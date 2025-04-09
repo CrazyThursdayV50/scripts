@@ -1,0 +1,15 @@
+services:
+  hello-world:
+    image: hello-world:latest
+    container_name: hello-world
+    networks:
+      general:
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+        - subnet: "172.100.0.0/24"
