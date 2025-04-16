@@ -49,3 +49,12 @@ docker-elastic-start:
 docker-elastic-down:
 	@echo "Stopping Docker Elastic..."
 	@${DOCKER_SHELL_COMPOSE_DIR}/down-compose.sh ${ELASTIC_SERVICE_NAME} ${DOCKER_ELASTIC_DIR}/compose.yml ${DOCKER_ELASTIC_DIR}/.env
+
+DOCKER_CADDY_DIR=${DOCKER_DIR}/caddy
+CADDY_SERVICE_NAME="caddy"
+docker-caddy-start:
+	@echo "Starting Docker Elastic..."
+	@${DOCKER_SHELL_COMPOSE_DIR}/start.sh ${CADDY_SERVICE_NAME} ${DOCKER_CADDY_DIR}/compose.yml ${DOCKER_CADDY_DIR}/.env
+docker-caddy-down:
+	@echo "Stopping Docker Elastic..."
+	@${DOCKER_SHELL_COMPOSE_DIR}/down-compose.sh ${CADDY_SERVICE_NAME} ${DOCKER_CADDY_DIR}/compose.yml ${DOCKER_CADDY_DIR}/.env

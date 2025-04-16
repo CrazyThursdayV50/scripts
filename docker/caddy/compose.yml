@@ -1,0 +1,27 @@
+services:
+  caddy:
+    container_name: caddy
+    image: caddy:latest
+    restart: unless-stopped
+    ports:
+      - "80:80"
+      - "443:443"
+      - "443:443/udp"
+    volumes:
+      - ${CADDY_FILE}:/etc/caddy/Caddyfile
+      - ${CADDY_SITE}:/srv
+      - ${CADDY_DATA}:/data
+      - ${CADDY_CONFIG}:/config
+    networks:
+      general:
+        aliases:
+          - caddy
+
+volumes:
+  caddy_data:
+  caddy_config:
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true
