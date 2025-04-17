@@ -1,5 +1,12 @@
 gen-certs:
-	cd ./cert && sh -c "./gen.sh"
+	cd ./cert && sh -c "./gen_root.sh && ./gen_server.sh && ./gen_client.sh"
+gen-certs-root:
+	cd ./cert && sh -c "./gen_root.sh"
+gen-certs-server:
+	cd ./cert && sh -c "./gen_server.sh"
+gen-certs-client:
+	cd ./cert && sh -c "./gen_client.sh"
+
 
 DOCKER_DIR=./docker
 DOCKER_SHELL_DIR=${DOCKER_DIR}/shell
