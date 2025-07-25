@@ -13,7 +13,7 @@ services:
           - mysql
     volumes:
       - ${MYSQL_DATA}:/bitnami/mysql/data
-      # - ${MYSQL_INIT_DIR}:/docker-entrypoint-initdb.d
+      - ${MYSQL_INIT_DIR}:/docker-entrypoint-initdb.d
 
     healthcheck:
       test: ["CMD", "/opt/bitnami/scripts/mysql/healthcheck.sh"]
