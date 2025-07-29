@@ -4,7 +4,7 @@ services:
     restart: on-failure
     image: bitnami/jaeger:latest
     privileged: true
-    env_file: ${JAEGER_ENV_FILE}
+    env_file: ${ENV_FILE}
     ports:
       - 5775:5775/udp
       - 6831:6831/udp
@@ -18,10 +18,13 @@ services:
       general:
         aliases:
           - jaeger
+
     volumes:
-      - ${JAEGER_LOGS}:/bitnami/jaeger/logs
+      - "jaeger_logs:/bitnami/jaeger/logs"
+
     mem_limit: 512M
     memswap_limit: 1G
+
     logging:
       driver: json-file
       options:
@@ -31,6 +34,10 @@ services:
     # depends_on:
     #   elastic:
     #     condition: service_healthy
+
+volumes:
+  jaeger_logs:
+    driver: local
 
 networks:
   general:

@@ -3,10 +3,9 @@ services:
     container_name: elastic
     image: bitnami/elasticsearch:latest
     privileged: true
+    env_file: ${ENV_FILE}
     ports:
       - 9200:9200
-    mem_limit: 2G
-    memswap_limit: 4G
     networks:
       general:
         aliases:
@@ -21,17 +20,27 @@ services:
       interval: 30s
       timeout: 10s
       retries: 3
-    env_file: ${ELASTIC_ENV_FILE}
     volumes:
-      - ${ES_DATA}:/bitnami/elasticsearch/data
-      - ${ES_PLUGINS}:/bitnami/elasticsearch/plugins
-      - ${ES_LOGS}:/opt/bitnami/elasticsearch/logs
+      - "elastic_data:/bitnami/elasticsearch/data"
+      - "elastic_plugins:/bitnami/elasticsearch/plugins"
+      - "elastic_logs:/opt/bitnami/elasticsearch/logs"
+
+    mem_limit: 2G
+    memswap_limit: 4G
 
     logging:
       driver: json-file
       options:
         max-size: 100m
         max-file: 10
+
+volumes:
+  elastic_data:
+    driver: local
+  elastic_plugins:
+    driver: local
+  elastic_logs:
+    driver: local
 
 networks:
   general:

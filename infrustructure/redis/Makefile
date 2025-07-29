@@ -17,4 +17,3 @@ up-podman:
 down-podman:
 	@echo "Cleaning podman ${COMPOSE_NAME}..."
 	@${PODMAN_SCRIPT_PATH}/down.sh ${COMPOSE_NAME} compose.yml .env
-
