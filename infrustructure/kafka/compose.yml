@@ -1,0 +1,31 @@
+services:
+  kafka:
+    container_name: kafka
+    restart: on-failure
+    image: docker.io/bitnami/kafka:4.0
+    privileged: true
+    ports:
+      - "9092:9092"
+
+    volumes:
+      - "kafka_data:/bitnami"
+
+    env_file: ${ENV_FILE}
+
+    mem_limit: 1G
+    memswap_limit: 2G
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
+
+volumes:
+  kafka_data:
+    driver: local
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true
