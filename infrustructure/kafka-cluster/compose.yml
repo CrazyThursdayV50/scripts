@@ -1,0 +1,64 @@
+volumes:
+  kafka_0_data:
+    driver: local
+  kafka_1_data:
+    driver: local
+  kafka_2_data:
+    driver: local
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true
+
+services:
+  kafka-0:
+    container_name: kafka-0
+    restart: on-failure
+    privileged: true
+    image: docker.io/bitnami/kafka:4.0
+    ports:
+      - "9092"
+    env_file: ${ENV_FILE_0}
+    volumes:
+      - kafka_0_data:/bitnami/kafka
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
+
+  kafka-1:
+    container_name: kafka-1
+    restart: on-failure
+    privileged: true
+    image: docker.io/bitnami/kafka:4.0
+    ports:
+      - "9092"
+    env_file: ${ENV_FILE_1}
+    volumes:
+      - kafka_1_data:/bitnami/kafka
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
+
+  kafka-2:
+    container_name: kafka-2
+    restart: on-failure
+    privileged: true
+    image: docker.io/bitnami/kafka:4.0
+    ports:
+      - "9092"
+    env_file: ${ENV_FILE_2}
+    volumes:
+      - kafka_2_data:/bitnami/kafka
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
