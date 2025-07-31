@@ -1,0 +1,29 @@
+volumes:
+  nats_data:
+    driver: local
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true
+
+services:
+  nats:
+    container_name: nats
+    restart: on-failure
+    privileged: true
+    image: docker.io/bitnami/nats:2
+    env_file: ${ENV_FILE}
+    ports:
+      - "4222:4222"
+      - "6222:6222"
+      - "8222:8222"
+
+    mem_limit: 512M
+    memswap_limit: 1G
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 10m
+        max-file: 10
