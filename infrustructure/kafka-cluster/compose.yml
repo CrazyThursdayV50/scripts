@@ -12,8 +12,8 @@ networks:
     external: true
 
 services:
-  kafka-0:
-    container_name: kafka-0
+  kafka0:
+    container_name: kafka0
     restart: on-failure
     privileged: true
     image: docker.io/bitnami/kafka:4.0
@@ -29,8 +29,13 @@ services:
         max-size: 100m
         max-file: 10
 
-  kafka-1:
-    container_name: kafka-1
+    networks:
+      general:
+        aliases:
+          - kafka0
+
+  kafka1:
+    container_name: kafka1
     restart: on-failure
     privileged: true
     image: docker.io/bitnami/kafka:4.0
@@ -40,14 +45,19 @@ services:
     volumes:
       - kafka_1_data:/bitnami/kafka
 
+    networks:
+      general:
+        aliases:
+          - kafka1
+
     logging:
       driver: json-file
       options:
         max-size: 100m
         max-file: 10
 
-  kafka-2:
-    container_name: kafka-2
+  kafka2:
+    container_name: kafka2
     restart: on-failure
     privileged: true
     image: docker.io/bitnami/kafka:4.0
@@ -62,3 +72,8 @@ services:
       options:
         max-size: 100m
         max-file: 10
+
+    networks:
+      general:
+        aliases:
+          - kafka2
