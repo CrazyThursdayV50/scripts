@@ -18,7 +18,7 @@ services:
     privileged: true
     image: docker.io/bitnami/kafka:4.0
     ports:
-      - "9092"
+      - "19092:9092"
     env_file: ${ENV_FILE_0}
     volumes:
       - kafka_0_data:/bitnami/kafka
@@ -40,7 +40,7 @@ services:
     privileged: true
     image: docker.io/bitnami/kafka:4.0
     ports:
-      - "9092"
+      - "19192:9092"
     env_file: ${ENV_FILE_1}
     volumes:
       - kafka_1_data:/bitnami/kafka
@@ -62,7 +62,7 @@ services:
     privileged: true
     image: docker.io/bitnami/kafka:4.0
     ports:
-      - "9092"
+      - "19292:9092"
     env_file: ${ENV_FILE_2}
     volumes:
       - kafka_2_data:/bitnami/kafka
