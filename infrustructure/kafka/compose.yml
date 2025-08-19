@@ -15,6 +15,11 @@ services:
     mem_limit: 1G
     memswap_limit: 2G
 
+    networks:
+      general:
+        aliases:
+          - kafka
+
     logging:
       driver: json-file
       options:

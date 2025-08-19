@@ -1,5 +1,8 @@
 #! /bin/bash
 
-COMPOSE_NAME=$1
+PROJECT_NAME=$1
+COMPOSE_FILE=$2
 
-podman compose -p ${COMPOSE_NAME} down
+echo "project: $PROJECT_NAME"
+echo "compose file: $COMPOSE_FILE"
+podman compose -p ${PROJECT_NAME} -f ${COMPOSE_FILE} down
