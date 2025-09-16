@@ -1,3 +1,4 @@
+#! /usr/bin/env bash
 OUTPUT_DIR=./certs
 VALID_DAYS=3650
 ROOT_CONFIG="./config/root.conf"

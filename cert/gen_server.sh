@@ -1,3 +1,5 @@
+#! /usr/bin/env bash
+
 OUTPUT_DIR=./certs
 VALID_DAYS=3650
 ROOT_KEY="${OUTPUT_DIR}/root.key"
