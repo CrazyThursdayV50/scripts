@@ -2,7 +2,7 @@ services:
   redis:
     container_name: redis
     restart: on-failure
-    image: docker.io/bitnami/redis:7.4
+    image: redis:8.2.2
     privileged: true
     env_file: ${ENV_FILE}
     ports:
@@ -12,7 +12,7 @@ services:
         aliases:
           - redis
     volumes:
-      - "redis_data:/bitnami/redis/data"
+      - "redis_data:/data"
 
     mem_limit: 1G
     memswap_limit: 2G
