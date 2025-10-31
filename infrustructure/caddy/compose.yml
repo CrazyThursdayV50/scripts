@@ -8,17 +8,17 @@ services:
       - "443:443"
       - "443:443/udp"
     volumes:
-      - "caddy_file:/etc/caddy/Caddyfile"
-      - "caddy_site:/srv"
-      - "caddy_data:/data"
-      - ${CADDY_CONFIG}:/config
+      - ${CADDY_FILE_PATH}:/etc/caddy
+      - caddy_site:/srv
+      - caddy_data:/data
+      - caddy_conf:/config
     networks:
       general:
         aliases:
           - caddy
 
 volumes:
-  caddy_file:
+  caddy_conf:
     driver: local
   caddy_site:
     driver: local

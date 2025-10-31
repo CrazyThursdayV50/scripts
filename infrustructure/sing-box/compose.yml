@@ -1,0 +1,37 @@
+services:
+  sing-box:
+    container_name: sing-box
+    restart: on-failure
+    image: ghcr.io/sagernet/sing-box:latest
+    privileged: true
+    env_file: ${ENV_FILE}
+    volumes:
+      - /etc/sing-box:/etc/sing-box
+      - sing-box_data:/var/lib/sing-box
+
+    command: -D /var/lib/sing-box -c /etc/sing-box/config.json -C /etc/sing-box/conf run
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+
+    devices:
+      - /dev/net/tun:/dev/net/tun
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256MB
+
+    mem_limit: 256MB
+    memswap_limit: 512MB
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
+
+volumes:
+  sing-box_data:
+    driver: local
