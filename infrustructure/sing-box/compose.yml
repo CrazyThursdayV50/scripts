@@ -5,17 +5,17 @@ services:
     image: ghcr.io/sagernet/sing-box:latest
     privileged: true
     env_file: ${ENV_FILE}
-    ports:
-      - 7890:7890
-    networks:
-      general:
-        aliases:
-          - redis
     volumes:
-      - /etc/sing-box:/etc/sing-box/
+      - /etc/sing-box:/etc/sing-box
       - sing-box_data:/var/lib/sing-box
 
-    command: -D /var/lib/sing-box -C /etc/sing-box/ run
+    command: -D /var/lib/sing-box -c /etc/sing-box/config.json -C /etc/sing-box/conf run
+    network_mode: host
+    cap_add:
+      - NET_ADMIN
+
+    devices:
+      - /dev/net/tun:/dev/net/tun
 
     deploy:
       resources:
@@ -35,8 +35,3 @@ services:
 volumes:
   sing-box_data:
     driver: local
-
-networks:
-  general:
-    name: ${NETWORK_NAME}
-    external: true
