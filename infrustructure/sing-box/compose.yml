@@ -1,0 +1,42 @@
+services:
+  sing-box:
+    container_name: sing-box
+    restart: on-failure
+    image: ghcr.io/sagernet/sing-box:latest
+    privileged: true
+    env_file: ${ENV_FILE}
+    ports:
+      - 7890:7890
+    networks:
+      general:
+        aliases:
+          - redis
+    volumes:
+      - /etc/sing-box:/etc/sing-box/
+      - sing-box_data:/var/lib/sing-box
+
+    command: -D /var/lib/sing-box -C /etc/sing-box/ run
+
+    deploy:
+      resources:
+        limits:
+          cpus: "0.5"
+          memory: 256MB
+
+    mem_limit: 256MB
+    memswap_limit: 512MB
+
+    logging:
+      driver: json-file
+      options:
+        max-size: 100m
+        max-file: 10
+
+volumes:
+  sing-box_data:
+    driver: local
+
+networks:
+  general:
+    name: ${NETWORK_NAME}
+    external: true

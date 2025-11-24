@@ -1,0 +1,12 @@
+{
+	"log": {
+		"output": "/var/lib/sing-box/access.log",
+		"level": "info",
+		"timestamp": true
+	},
+	"dns": {},
+	"outbounds": [
+		{ "tag": "direct", "type": "direct" },
+		{ "tag": "block", "type": "block" }
+	]
+}

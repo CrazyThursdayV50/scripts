@@ -1,0 +1,38 @@
+{
+	"inbounds": [
+		{
+			"tag": "VLESS-REALITY",
+			"type": "vless",
+			"listen": "::",
+			"listen_port": 7953,
+			"users": [
+				{
+					"flow": "xtls-rprx-vision",
+					"uuid": "9e42ab89-2a1d-4eac-ac4b-d0597780d64e"
+				}
+			],
+			"tls": {
+				"enabled": true,
+				"server_name": "www.cloudflare.com",
+				"reality": {
+					"enabled": true,
+					"handshake": {
+						"server": "www.cloudflare.com",
+						"server_port": 443
+					},
+					"private_key": "6NoYs_SKJZctc-d_mXIEDM2CXPJKGUS9JVPIRC5L2EU",
+					"short_id": [""]
+				}
+			}
+		}
+	],
+	"outbounds": [
+		{
+			"type": "direct"
+		},
+		{
+			"tag": "public_key_tTx0hOl9C0QXwZQRhzkt5lkccweHKc8AxpVCMgBHZVQ",
+			"type": "direct"
+		}
+	]
+}
