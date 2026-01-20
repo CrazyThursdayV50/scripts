@@ -1,0 +1,46 @@
+### Delta git config
+[core]
+    pager = delta
+
+[interactive]
+    diffFilter = delta --color-only
+
+[delta]
+    hyperlinks = true
+    hyperlinks-file-link-format = "zed://file/{path}:{line}"
+    # hyperlinks-file-link-format = "vscode://file/{path}:{line}"
+    # hyperlinks-file-link-format = "idea://open?file={path}&line={line}"
+    # hyperlinks-file-link-format = "pycharm://open?file={path}&line={line}"
+
+    line-numbers = true
+    side-by-side = true
+
+    # use n and N to move between diff sections
+    navigate = true
+
+    # or light = true, or omit for auto-detection
+    # dark = true
+    features = custom
+
+[delta "custom"]
+    line-numbers = true
+    line-numbers-left-format = "|{nm:>4}|"
+    line-numbers-right-format = "|{np:>4}│"
+    line-numbers-zero-style = "#444444"
+
+    line-numbers-minus-style = bold "#FF8080" "#7C0E0E"
+    minus-empty-line-marker-style = "#7C0E0E"
+    minus-emph-style = bold black "#FF8080" strike
+    minus-non-emph-style = black "#7C0E0E" strike
+    minus-style = "#FF8080" "#7C0E0E"
+
+    line-numbers-plus-style = bold "#80FF80" "#0E7C0E"
+    plus-empty-line-marker-style = "#0E7C0E"
+    plus-emph-style = bold black "#80FF80"
+    plus-non-emph-style = black "#0E7C0E"
+    plus-style = "#80FF80" "#0E7C0E"
+
+    file-style = bold yellow ul
+
+[merge]
+    conflictStyle = zdiff3
