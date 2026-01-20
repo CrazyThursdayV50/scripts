@@ -1,6 +1,14 @@
 ### Delta git config
 [core]
     pager = delta
+	quotepath = false
+	longpaths = true
+	autocrlf = input
+	trustctime = false
+	excludesfile = ~/.gitignore_global
+	attributesfile = ~/.attributes_global
+	ignorecase = true
+	untrackedcache = true
 
 [interactive]
     diffFilter = delta --color-only
@@ -14,31 +22,25 @@
 
     line-numbers = true
     side-by-side = true
-
-    # use n and N to move between diff sections
+	syntax-theme = GitHub
     navigate = true
 
-    # or light = true, or omit for auto-detection
-    # dark = true
-    features = custom
+    # minus-empty-line-marker-style = "#7C0E0E"
+    # minus-emph-style = bold black "#FF8080" strike
+    # minus-non-emph-style = black "#7C0E0E" strike
+    # minus-style = "#FF8080" "#7C0E0E"
+	minus-style = red bold strike "#ffe0e0"
+	minus-emph-style = "#ffffff" bold strike "#800000"
+	minus-empty-line-marker-style = normal "#ffe0e0"
 
-[delta "custom"]
-    line-numbers = true
-    line-numbers-left-format = "|{nm:>4}|"
-    line-numbers-right-format = "|{np:>4}│"
-    line-numbers-zero-style = "#444444"
+    # plus-non-emph-style = black "#0E7C0E"
+    # plus-style = "#80FF80" "#0E7C0E"
+    # plus-emph-style = bold black "#80FF80"
+    # plus-empty-line-marker-style = "#0E7C0E"
 
-    line-numbers-minus-style = bold "#FF8080" "#7C0E0E"
-    minus-empty-line-marker-style = "#7C0E0E"
-    minus-emph-style = bold black "#FF8080" strike
-    minus-non-emph-style = black "#7C0E0E" strike
-    minus-style = "#FF8080" "#7C0E0E"
-
-    line-numbers-plus-style = bold "#80FF80" "#0E7C0E"
-    plus-empty-line-marker-style = "#0E7C0E"
-    plus-emph-style = bold black "#80FF80"
-    plus-non-emph-style = black "#0E7C0E"
-    plus-style = "#80FF80" "#0E7C0E"
+	plus-style = green bold "#e0ffe0"
+	plus-emph-style = "#ffffff" bold "#008000"
+	plus-empty-line-marker-style = normal "#e0ffe0"
 
     file-style = bold yellow ul
 
