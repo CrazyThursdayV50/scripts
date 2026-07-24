@@ -2,5 +2,12 @@
 APP=$1
 REMOTE_REPO=$2
 
-podman tag ${APP}:local ${REMOTE_REPO}:latest
-podman push ${REMOTE_REPO}:latest
+podman buildx build \
+	--output type=docker \
+	--platform linux/amd64,linux/arm64 \
+	-t ${APP}:local \
+	-f ./docker/Dockerfile \
+	.
+
+podman tag ${APP}:local ${REPO_NAME}/${APP}:latest
+podman push ${REPO_NAME}/${APP}:latest

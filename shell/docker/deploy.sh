@@ -1,6 +1,13 @@
 # /bin/bash
 APP=$1
-REMOTE_REPO=$2
+REPO_NAME=$2
 
-docker tag ${APP}:local ${REMOTE_REPO}:latest
-docker push ${REMOTE_REPO}:latest
+docker buildx build \
+	--output type=docker \
+	--platform linux/amd64,linux/arm64 \
+	-t ${APP}:local \
+	-f ./docker/Dockerfile \
+	.
+
+docker tag ${APP}:local ${REPO_NAME}/${APP}:latest
+docker push ${REPO_NAME}/${APP}:latest
