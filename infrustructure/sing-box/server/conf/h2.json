@@ -1,0 +1,23 @@
+{
+  "inbounds": [
+    {
+      "tag": "Hysteria2",
+      "type": "hysteria2",
+      "listen": "::",
+      "listen_port": 37794,
+      "users": [
+        {
+          "password": "1ba95b22"
+        }
+      ],
+      "tls": {
+        "enabled": true,
+        "alpn": [
+          "h3"
+        ],
+        "key_path": "/etc/sing-box/certs/tls.key",
+        "certificate_path": "/etc/sing-box/certs/tls.cer"
+      }
+    }
+  ]
+}

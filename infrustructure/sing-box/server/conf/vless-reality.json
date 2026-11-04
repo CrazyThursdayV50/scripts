@@ -4,7 +4,7 @@
 			"tag": "VLESS-REALITY",
 			"type": "vless",
 			"listen": "::",
-			"listen_port": 7953,
+			"listen_port": 37953,
 			"users": [
 				{
 					"flow": "xtls-rprx-vision",
